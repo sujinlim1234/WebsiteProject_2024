@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerry's</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: #fff;
+            padding: 20px;
+            border-bottom: 2px solid black;
+            display: flex;
+            justify-content: center;
+        }
+
+        .main-nav {
+            display: flex;
+            align-items: center;
+            gap: 80px;
+        }
+
+        .main-nav ul {
+            list-style: none;
+            display: flex;
+            padding: 0;
+            margin: 0;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: black;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px 15px;
+        }
+
+        .hero {
+            text-align: center;
+            background-image: url('./images/home.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .letters-container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .letter {
+            width: 150px; /* 각 문자 이미지 크기, 3배로 크게 조정 */
+            height: 150px;
+            transition: transform 0.3s ease; /* 애니메이션 효과 */
+        }
+
+        .letter:hover {
+            transform: translateY(-10px); /* 마우스 올렸을 때 위로 이동 */
+        }
+
+        .hero .arrow {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 32px;
+            cursor: pointer;
+            color: white;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translate(-50%, 0);
+            }
+            50% {
+                transform: translate(-50%, -10px);
+            }
+        }
+
+        .cta, .melody {
+            text-align: center;
+            color: white;
+            padding: 40px;
+            font-size: 24px;
+            font-weight: bold;
+            height: 200vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .cta {
+            background-color: #FF7031;
+            background-image: url('./images/orange-wave-background.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .cta h1 {
+            font-size: 48px;
+            margin: 0;
+        }
+
+        .cta p {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .cta button {
+            background-color: #727FF7;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .melody {
+            background-color: #FFB031;
+        }
+
+        .scroll-icon {
+            position: absolute;
+            width: 100px;
+            animation: float 5s infinite ease-in-out;
+        }
+
+        .cta .icon1 {
+            top: 10%;
+            left: 15%;
+        }
+
+        .cta .icon2 {
+            top: 40%;
+            right: 20%;
+        }
+
+        .cta .icon3 {
+            top: 30%;
+            right: 10%;
+        }
+
+        .cta .icon4 {
+            bottom: 20%;
+            left: 25%;
+        }
+
+        .melody .icon1 {
+            top: 30%;
+            left: 10%;
+        }
+
+        .melody .icon2 {
+            bottom: 20%;
+            right: 25%;
+        }
+
+        .melody .icon3 {
+            top: 10%;
+            right: 5%;
+        }
+
+        .melody .icon4 {
+            bottom: 10%;
+            left: 5%;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #f1f1f1;
+        }
+
+        /* 클릭 가능한 이미지 스타일 */
+        .clickable-image {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 150px; /* 3배 크기로 조정 */
+            height: 150px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="/reuse">Reuse</a></li>
+                <li><a href="/repair">Repair</a></li>
+                <li><a href="/rehome">Rehome</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="letters-container">
+                <!-- WEATHER -->
+                <img src="./images/w.png" alt="W" class="letter">
+                <img src="./images/e.png" alt="E" class="letter">
+                <img src="./images/a.png" alt="A" class="letter">
+                <img src="./images/t.png" alt="T" class="letter">
+                <img src="./images/h.png" alt="H" class="letter">
+                <img src="./images/e.png" alt="E" class="letter">
+                <img src="./images/r.png" alt="R" class="letter">
+
+                <!-- Space between words -->
+                <div style="width: 20px;"></div>
+
+                <!-- OOTD -->
+                <img src="./images/o.png" alt="O" class="letter">
+                <img src="./images/o.png" alt="O" class="letter">
+                <img src="./images/t.png" alt="T" class="letter">
+                <img src="./images/d.png" alt="D" class="letter">
+            </div>
+            <div class="arrow" onclick="scrollToNext()">&#x25BC;</div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="cta">
+            <h1>Drink Social, Drink Gerry's</h1>
+            <p>Fun. Fresh. Fizzy as. Gerry's is the hard seltzer that makes the good times</p>
+            <button>Shop now</button>
+            <img src="./images/couldy.png" alt="Icon 1" class="scroll-icon icon1">
+            <img src="./images/sunny.png" alt="Icon 2" class="scroll-icon icon2">
+            <img src="./images/rainy.png" alt="Icon 3" class="scroll-icon icon3">
+            <img src="./images/couldy.png" alt="Icon 4" class="scroll-icon icon4">
+        </section>
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <input type="text" placeholder="TODAY WEATHER?">
+            <button>Search</button>
+        </section>
+
+        <!-- Simple Melody -->
+        <section class="melody">
+            <h2>Our melody is simple. Let's use things over and over, again and again.</h2>
+            <img src="./images/couldy.png" alt="Icon 5" class="scroll-icon icon1">
+            <img src="./images/sunny.png" alt="Icon 6" class="scroll-icon icon2">
+            <img src="./images/rainy.png" alt="Icon 7" class="scroll-icon icon3">
+            <img src="./images/couldy.png" alt="Icon 8" class="scroll-icon icon4">
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Round Round. All rights reserved.</p>
+    </footer>
+
+    <!-- 클릭 가능한 이미지 추가 -->
+    <a href="new_page.html">
+        <img src="./images/start.png" alt="Clickable Image" class="clickable-image">
+    </a>
+
+    <script>
+        function scrollToNext() {
+            const nextSection = document.querySelector('.cta');
+            nextSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    </script>
+</body>
+</html>
+
