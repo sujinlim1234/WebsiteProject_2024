@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>드레스업 게임</title>
+    <style>
+        :root {
+            --primary-color: #ff85a2;
+            --secondary-color: #7c5cff;
+            --card-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            --glow-effect: 0 0 20px rgba(255, 133, 162, 0.3);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: url("images/cloth page.jpg") no-repeat center center/cover;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            touch-action: manipulation;
+        }
+
+        .header-line {
+            width: 80%;
+            height: 2px;
+            background-color: black;
+            margin-bottom: 20px;
+        }
+
+        .weather-tip {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 20px;
+            border-radius: 20px;
+            margin: 15px 0;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            box-shadow: var(--card-shadow);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            width: 80%;
+            text-align: center;
+        }
+
+        .character-container {
+            position: relative;
+            width: 50%;
+            max-width: 300px;
+            aspect-ratio: 1/1.5;
+            margin: 30px 0;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 30px;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .character, .worn-item {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* 레이어 순서 지정 */
+        #hairLayer {
+            z-index: 1; /* Hair 레이어를 모델 이미지 위로 이동 */
+        }
+
+        #baseCharacter {
+            z-index: 0; /* 기본 캐릭터 */
+        }
+
+        #topLayer {
+            z-index: 2; /* 상의 */
+        }
+
+        #bottomLayer {
+            z-index: 1; /* 하의 */
+        }
+
+        #shoesLayer,
+        #accessoriesLayer {
+            z-index: 3; /* 신발 및 액세서리 */
+        }
+
+        .reset-button {
+            margin-top: 15px;
+            padding: 10px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: var(--card-shadow);
+            transition: background-color 0.3s ease;
+        }
+
+        .reset-button:hover {
+            background-color: #ff6381;
+        }
+
+        .category-icons {
+            display: flex;
+            justify-content: space-around;
+            width: 80%;
+            margin: 15px 0;
+            background: white;
+            padding: 10px;
+            border-radius: 25px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .category-item {
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 20px;
+            background: white;
+            text-align: center;
+        }
+
+        .category-item.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .clothes-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            width: 80%;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            backdrop-filter: blur(5px);
+        }
+
+        .clothes-item {
+            aspect-ratio: 1;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 15px;
+            padding: 5px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .clothes-item img {
+            width: 70%;
+            height: 70%;
+            object-fit: contain;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-line"></div>
+    <div class="weather-tip">오늘은 흐린 날씨예요! 긴팔, 긴바지가 필요해요!</div>
+
+    <div class="character-container">
+        <img src="images/her.png" alt="Character" class="character" id="baseCharacter">
+        <img src="" alt="Hair" class="worn-item" id="hairLayer" style="display: none;">
+        <img src="" alt="Worn Top" class="worn-item" id="topLayer" style="display: none;">
+        <img src="" alt="Worn Bottom" class="worn-item" id="bottomLayer" style="display: none;">
+        <img src="" alt="Worn Shoes" class="worn-item" id="shoesLayer" style="display: none;">
+        <img src="" alt="Worn Accessories" class="worn-item" id="accessoriesLayer" style="display: none;">
+    </div>
+
+    <button class="reset-button" onclick="resetOutfit()">다시 갈아입기</button>
+
+    <div class="category-icons">
+        <div class="category-item active" onclick="showCategory('tops')">Tops</div>
+        <div class="category-item" onclick="showCategory('bottoms')">Bottoms</div>
+        <div class="category-item" onclick="showCategory('hair')">Hair</div>
+        <div class="category-item" onclick="showCategory('shoes')">Shoes</div>
+        <div class="category-item" onclick="showCategory('accessories')">Accessories</div>
+    </div>
+
+    <div class="clothes-grid" id="clothesGrid"></div>
+
+    <script>
+        const categoryIcons = document.querySelectorAll('.category-item');
+        const clothesGrid = document.getElementById('clothesGrid');
+
+        const layers = {
+            tops: document.getElementById('topLayer'),
+            bottoms: document.getElementById('bottomLayer'),
+            hair: document.getElementById('hairLayer'),
+            shoes: document.getElementById('shoseLayer'),
+            accessories: document.getElementById('accessoriesLayer'),
+        };
+
+        const clothes = {
+            tops: Array.from({ length: 16 }, (_, i) => `images/top${i + 1}.png`),
+            bottoms: Array.from({ length: 16 }, (_, i) => `images/pants${i + 1}.png`),
+            hair: Array.from({ length: 16 }, (_, i) => `images/hair${i + 1}.png`),
+            shoes: Array.from({ length: 16 }, (_, i) => `images/shoes${i + 1}.png`),
+            accessories: Array.from({ length: 16 }, (_, i) => `images/acc${i + 1}.png`),
+        };
+
+        function resetOutfit() {
+            Object.values(layers).forEach(layer => (layer.style.display = 'none'));
+        }
+
+        function showCategory(category) {
+            categoryIcons.forEach(icon => icon.classList.remove('active'));
+            const activeIcon = [...categoryIcons].find(icon => icon.textContent.toLowerCase() === category);
+            activeIcon.classList.add('active');
+
+            clothesGrid.innerHTML = '';
+            clothes[category].forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.classList.add('clothes-item');
+                itemDiv.innerHTML = `<img src="${item}" alt="${category} item">`;
+                itemDiv.onclick = () => wearItem(category, item);
+                clothesGrid.appendChild(itemDiv);
+            });
+        }
+
+        function wearItem(category, item) {
+            const layer = layers[category];
+            layer.src = item;
+            layer.style.display = 'block';
+        }
+
+        showCategory('tops');
+    </script>
+</body>
+</html>
+
+
+
+

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerry's</title>
+    <title>weather ootd</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -56,21 +56,7 @@
         }
 
         .letters-container {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .letter {
-            width: 150px; /* 각 문자 이미지 크기, 3배로 크게 조정 */
-            height: 150px;
-            transition: transform 0.3s ease; /* 애니메이션 효과 */
-        }
-
-        .letter:hover {
-            transform: translateY(-10px); /* 마우스 올렸을 때 위로 이동 */
+            display: none; /* 숨김 처리 */
         }
 
         .hero .arrow {
@@ -197,12 +183,11 @@
             background: #f1f1f1;
         }
 
-        /* 클릭 가능한 이미지 스타일 */
         .clickable-image {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            width: 150px; /* 3배 크기로 조정 */
+            width: 150px;
             height: 150px;
             cursor: pointer;
         }
@@ -223,24 +208,8 @@
     <main>
         <!-- Hero Section -->
         <section class="hero">
-            <div class="letters-container">
-                <!-- WEATHER -->
-                <img src="./images/w.png" alt="W" class="letter">
-                <img src="./images/e.png" alt="E" class="letter">
-                <img src="./images/a.png" alt="A" class="letter">
-                <img src="./images/t.png" alt="T" class="letter">
-                <img src="./images/h.png" alt="H" class="letter">
-                <img src="./images/e.png" alt="E" class="letter">
-                <img src="./images/r.png" alt="R" class="letter">
-
-                <!-- Space between words -->
-                <div style="width: 20px;"></div>
-
-                <!-- OOTD -->
-                <img src="./images/o.png" alt="O" class="letter">
-                <img src="./images/o.png" alt="O" class="letter">
-                <img src="./images/t.png" alt="T" class="letter">
-                <img src="./images/d.png" alt="D" class="letter">
+            <div class="letters-container" style="display: none;">
+                <!-- Hidden Content -->
             </div>
             <div class="arrow" onclick="scrollToNext()">&#x25BC;</div>
         </section>
@@ -276,8 +245,8 @@
         <p>&copy; 2024 Round Round. All rights reserved.</p>
     </footer>
 
-    <!-- 클릭 가능한 이미지 추가 -->
-    <a href="new_page.html">
+    <!-- Clickable Image -->
+    <a href="second_site.html"> <!-- second_site.html로 링크 변경 -->
         <img src="./images/start.png" alt="Clickable Image" class="clickable-image">
     </a>
 
